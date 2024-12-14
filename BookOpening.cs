@@ -13,31 +13,22 @@ public class BookOpening : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 mousePosition = Input.mousePosition;
-        Vector3 inunityPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
 
         if (Input.GetMouseButton(0))
         {
-            mousePosition.x = Mathf.Clamp(mousePosition.x, 0f, 180f);
-            float targetAngle = Mathf.Lerp(0, 180, mousePosition.x / 180f);
+            Vector3 mousePosition = Input.mousePosition;
+            mousePosition.z = 10;
+            Vector3 inunityPosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-
+            mousePosition.x = Mathf.Clamp(mousePosition.x, 0f, Screen.width);
+            float targetAngle = Mathf.Lerp(0, 180, mousePosition.x / Screen.width);
             float angle = Mathf.Lerp(transform.rotation.eulerAngles.z, targetAngle, Time.deltaTime * 1f);
-
 
             transform.rotation = Quaternion.Euler(0, 0, angle);
         }
 
-        else if (Input.GetMouseButton(1))
-        {
-
-            float targetAngle = 0f;
-
-            float angle = Mathf.Lerp(transform.rotation.eulerAngles.z, targetAngle, Time.deltaTime * 1f);
-
-
-            transform.rotation = Quaternion.Euler(0, 0, angle);
-        }
+      
 
 
     }
